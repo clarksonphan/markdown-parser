@@ -13,13 +13,9 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
-            System.out.println("Index before open Bracket " + currentIndex);
             int openBracket = markdown.indexOf("[", currentIndex);
-            System.out.println("Printing openBracket value " + openBracket);
             int closeBracket = markdown.indexOf("]", openBracket);
-            System.out.println("Printing closeBracket value " + closeBracket);
             int openParen = markdown.indexOf("(", closeBracket);
-            System.out.println("Printing openParen " + currentIndex);
             int closeParen = markdown.indexOf(")", openParen);
 
             //Checks for no link (stops infinite loop)
