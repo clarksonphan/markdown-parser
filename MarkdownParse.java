@@ -18,11 +18,28 @@ public class MarkdownParse {
             System.out.println("Printing openBracket value " + openBracket);
             int closeBracket = markdown.indexOf("]", openBracket);
             System.out.println("Printing closeBracket value " + closeBracket);
-            int openParen = markdown.indexOf("(", currentIndex);
+            int openParen = markdown.indexOf("(", closeBracket);
             System.out.println("Printing openParen " + currentIndex);
             int closeParen = markdown.indexOf(")", openParen);
+
+            //Checks for no link (stops infinite loop)
+            if (openParen == -1 || closeParen == -1) {
+                break;
+            }
+
+            //no title fix
+            else if (openBracket == -1 || closeBracket == -1) {
+                openParen = markdown.indexOf("(", currentIndex);
+                closeParen = markdown.indexOf(")", currentIndex);
+            }
+
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
+
+            //Stops loop if extra line in file
+            if (markdown.length()-2 <= currentIndex) {
+                break;
+            }
         }
         return toReturn;
     }
@@ -33,5 +50,6 @@ public class MarkdownParse {
         String content = Files.readString(fileName);
         ArrayList<String> links = getLinks(content);
 	    System.out.println(links);
+        System.out.println("test");
     }
 }
