@@ -11,6 +11,7 @@ public class MarkdownParse {
         System.out.println("Markdown length " + markdown.length());
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
+
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
             int openBracket = markdown.indexOf("[", currentIndex);
@@ -24,7 +25,7 @@ public class MarkdownParse {
             }
 
             //no title fix
-            else if (openBracket == -1 || closeBracket == -1) {
+            if (openBracket == -1 || closeBracket == -1) {
                 openParen = markdown.indexOf("(", currentIndex);
                 closeParen = markdown.indexOf(")", currentIndex);
             }
@@ -36,6 +37,9 @@ public class MarkdownParse {
             if (markdown.length()-2 <= currentIndex) {
                 break;
             }
+
+            //Need to fix crashing after additional invalid inputs
+
         }
         return toReturn;
     }
