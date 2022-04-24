@@ -19,16 +19,17 @@ public class MarkdownParse {
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
 
-            //Checks for no link (stops infinite loop)
-            if (openParen == -1 || closeParen == -1) {
-                break;
-            }
-
             //no title fix
             if (openBracket == -1 || closeBracket == -1) {
                 openParen = markdown.indexOf("(", currentIndex);
                 closeParen = markdown.indexOf(")", currentIndex);
             }
+
+            //Checks for no link
+            if (openParen == -1 || closeParen == -1) {
+                break;
+            }
+
 
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
