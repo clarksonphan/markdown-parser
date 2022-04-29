@@ -42,6 +42,10 @@ public class MarkdownParse {
                 closeParen = markdown.indexOf(")", closeParen+1);
             }
 
+            if(Math.abs(openParen-closeParen) == 1) {
+                break;
+            }
+
             if (openParen + 1 <= closeParen){
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
             }
