@@ -62,6 +62,7 @@ public class MarkdownParse {
 
             int closeParen = markdown.indexOf(")", openParen);
 
+            
             if (isEscapeCharacter(markdown, closeParen)){
                 closeParen = markdown.indexOf(")", closeParen+1);
             }
